@@ -18,7 +18,7 @@ namespace StorageAPI.Migrations
                 schema: "Storages",
                 columns: table => new
                 {
-                    Id = table.Column<decimal>(type: "decimal(20,0)", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(120)", maxLength: 120, nullable: true),
                     Cost = table.Column<decimal>(type: "decimal(12,2)", precision: 12, scale: 2, nullable: false)
@@ -33,7 +33,7 @@ namespace StorageAPI.Migrations
                 schema: "Storages",
                 columns: table => new
                 {
-                    Id = table.Column<decimal>(type: "decimal(20,0)", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(120)", maxLength: 120, nullable: true),
                     KindOfStorage = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
@@ -49,27 +49,25 @@ namespace StorageAPI.Migrations
                 schema: "Storages",
                 columns: table => new
                 {
-                    Id = table.Column<decimal>(type: "decimal(20,0)", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    ProductId1 = table.Column<decimal>(type: "decimal(20,0)", nullable: false),
-                    StorageId = table.Column<int>(type: "int", nullable: false),
-                    StorageId1 = table.Column<decimal>(type: "decimal(20,0)", nullable: false),
+                    ProductId = table.Column<long>(type: "bigint", nullable: false),
+                    StorageId = table.Column<long>(type: "bigint", nullable: false),
                     Quantity = table.Column<decimal>(type: "decimal(20,0)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_StatesOfStorages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StatesOfStorages_Products_ProductId1",
-                        column: x => x.ProductId1,
+                        name: "FK_StatesOfStorages_Products_ProductId",
+                        column: x => x.ProductId,
                         principalSchema: "Storages",
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StatesOfStorages_Storages_StorageId1",
-                        column: x => x.StorageId1,
+                        name: "FK_StatesOfStorages_Storages_StorageId",
+                        column: x => x.StorageId,
                         principalSchema: "Storages",
                         principalTable: "Storages",
                         principalColumn: "Id",
@@ -77,16 +75,16 @@ namespace StorageAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_StatesOfStorages_ProductId1",
+                name: "IX_StatesOfStorages_ProductId",
                 schema: "Storages",
                 table: "StatesOfStorages",
-                column: "ProductId1");
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StatesOfStorages_StorageId1",
+                name: "IX_StatesOfStorages_StorageId",
                 schema: "Storages",
                 table: "StatesOfStorages",
-                column: "StorageId1");
+                column: "StorageId");
         }
 
         /// <inheritdoc />

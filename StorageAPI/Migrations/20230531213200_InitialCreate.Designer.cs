@@ -11,7 +11,7 @@ using StorageAPI.Models.DbContexts;
 namespace StorageAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230530105509_InitialCreate")]
+    [Migration("20230531213200_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -26,11 +26,11 @@ namespace StorageAPI.Migrations
 
             modelBuilder.Entity("StorageAPI.Models.Product", b =>
                 {
-                    b.Property<decimal>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(20,0)");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<decimal>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<decimal>("Cost")
                         .HasPrecision(12, 2)
@@ -47,43 +47,37 @@ namespace StorageAPI.Migrations
 
             modelBuilder.Entity("StorageAPI.Models.StateOfStorage", b =>
                 {
-                    b.Property<decimal>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(20,0)");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<decimal>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("ProductId1")
-                        .HasColumnType("decimal(20,0)");
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("decimal(20,0)");
 
-                    b.Property<int>("StorageId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("StorageId1")
-                        .HasColumnType("decimal(20,0)");
+                    b.Property<long>("StorageId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId1");
+                    b.HasIndex("ProductId");
 
-                    b.HasIndex("StorageId1");
+                    b.HasIndex("StorageId");
 
                     b.ToTable("StatesOfStorages", "Storages");
                 });
 
             modelBuilder.Entity("StorageAPI.Models.Storage", b =>
                 {
-                    b.Property<decimal>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(20,0)");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<decimal>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Address")
                         .HasMaxLength(500)
@@ -106,13 +100,13 @@ namespace StorageAPI.Migrations
                 {
                     b.HasOne("StorageAPI.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId1")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("StorageAPI.Models.Storage", "Storage")
                         .WithMany()
-                        .HasForeignKey("StorageId1")
+                        .HasForeignKey("StorageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
