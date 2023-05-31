@@ -9,7 +9,7 @@ namespace StorageAPI.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public ulong Id { get; set; }
+        public uint Id { get; set; }
 
         [MaxLength(120)]
         public string ?Name { get; set; }

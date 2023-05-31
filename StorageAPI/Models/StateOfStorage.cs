@@ -8,14 +8,14 @@ namespace StorageAPI.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public ulong Id { get; set; }
+        public uint Id { get; set; }
 
         // Foreign key for Product
-        public int ProductId { get; set; }
+        public uint ProductId { get; set; }
         public Product Product { get; set; }
 
         // Foreign key for Storage
-        public int StorageId { get; set; }
+        public uint StorageId { get; set; }
         public Storage Storage { get; set; }
 
         public ulong Quantity { get; set; }
