@@ -35,6 +35,30 @@ namespace StorageAPI.Controllers
             return Ok(stateOfStorage);
         }
 
+        [HttpGet]
+        [Route("byStorage/{id}")]
+        public async Task<IActionResult> GetStateOfStorageByStorageId(uint id)
+        {
+            var statesOfStorages = await _storageService.GetStatesOfStoragesByStorageIdAsync(id);
+            if (statesOfStorages == null)
+            {
+                return NotFound();
+            }
+            return Ok(statesOfStorages);
+        }
+
+        [HttpGet]
+        [Route("byProduct/{id}")]
+        public async Task<IActionResult> GetStateOfStorageByProductId(uint id)
+        {
+            var statesOfStorages = await _storageService.GetStatesOfStoragesByProductIdAsync(id);
+            if (statesOfStorages == null)
+            {
+                return NotFound();
+            }
+            return Ok(statesOfStorages);
+        }
+
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> CreateStateOfStorage(StateOfStorage stateOfStorageToCreate)

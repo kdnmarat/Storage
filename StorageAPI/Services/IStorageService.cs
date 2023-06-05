@@ -21,5 +21,7 @@ namespace StorageAPI.Services
         Task<StateOfStorage> CreateStateOfStorageAsync(StateOfStorage stateOfStorageToCreate);
         Task<StateOfStorage> EditStateOfStorageAsync(uint id, StateOfStorage newStateOfStorageData);
         Task<StateOfStorage> DeleteStateOfStorageAsync(uint id);
+        Task<List<StateOfStorage>> GetStatesOfStoragesByStorageIdAsync(uint id);
+        Task<List<StateOfStorage>> GetStatesOfStoragesByProductIdAsync(uint id);
     }
 }
