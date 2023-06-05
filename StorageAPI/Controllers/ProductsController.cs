@@ -50,12 +50,24 @@ namespace StorageAPI.Controllers
 
         [HttpPost]
         [Route("[action]/{id}")]
-        public async Task<IActionResult> EditProduct(uint id, Product productToCreate)
+        public async Task<IActionResult> EditProduct(uint id, Product newProductData)
         {
-            var product = await _storageService.EditProductAsync(id, productToCreate);
+            var product = await _storageService.EditProductAsync(id, newProductData);
             if (product == null)
             {
                 return BadRequest();
+            }
+            return Ok(product);
+        }
+
+        [HttpPost]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> DeleteProduct(uint id)
+        {
+            var product = await _storageService.DeleteProductAsync(id);
+            if (product == null)
+            {
+                return NotFound();
             }
             return Ok(product);
         }

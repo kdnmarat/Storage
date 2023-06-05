@@ -12,11 +12,11 @@ namespace StorageAPI.Models
 
         // Foreign key for Product
         public uint ProductId { get; set; }
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
 
         // Foreign key for Storage
         public uint StorageId { get; set; }
-        public Storage Storage { get; set; }
+        public Storage? Storage { get; set; }
 
         public ulong Quantity { get; set; }
     }
