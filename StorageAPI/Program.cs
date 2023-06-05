@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using StorageAPI.Models.DbContexts;
+using StorageAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var _configuration = builder.Configuration;
@@ -17,6 +18,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(_configuration.GetConnectionString("LocalSqlDb"));
 });
+
+builder.Services.AddScoped<IStorageService, StorageService>();
 
 var app = builder.Build();
 

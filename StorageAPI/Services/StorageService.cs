@@ -20,35 +20,40 @@ namespace StorageAPI.Services
 
         public async Task<Product> GetProductAsync(uint id)
         {
-            var product = await _dbContext.Products.Where(p => (p.Id == id)).FirstAsync();
+            var product = await _dbContext.Products.Where(p => (p.Id == id)).FirstOrDefaultAsync();
             return product;
         }
 
         public async Task<Product> CreateProductAsync(Product productToCreate)
         {
             var productFromDb = await _dbContext.Products.SingleOrDefaultAsync(p => p.Id == productToCreate.Id);
-
             if (productFromDb != null)
             {
-                productFromDb.Name = productToCreate.Name;
-                productFromDb.Cost = productToCreate.Cost;
-
-                await _dbContext.SaveChangesAsync();
-
-                return productFromDb;
+                return null;
             }
-            else
+
+            var product = new Product()
             {
-                var product = new Product()
-                {
-                    Name = productToCreate.Name,
-                    Cost = productToCreate.Cost,
-                };
-                await _dbContext.Products.AddAsync(product);
-                await _dbContext.SaveChangesAsync();
-                return product;
-            }
+                Name = productToCreate.Name,
+                Cost = productToCreate.Cost,
+            };
+            await _dbContext.Products.AddAsync(product);
+            await _dbContext.SaveChangesAsync();
+            return product;
         }
 
+        public async Task<Product> EditProductAsync(uint id, Product productToEdit)
+        {
+            var productFromDb = await _dbContext.Products.SingleOrDefaultAsync(p => p.Id == id);
+            if (productFromDb == null)
+            {
+                return null;
+            }
+            productFromDb.Name = productToEdit.Name;
+            productFromDb.Cost = productToEdit.Cost;
+
+            await _dbContext.SaveChangesAsync();
+            return productFromDb;
+        }
     }
 }
