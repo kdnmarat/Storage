@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StorageAPI", "StorageAPI\StorageAPI.csproj", "{C08107C2-1548-40B8-9792-AEF8EE4F3624}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageDesktopApp", "StorageDesktopApp\StorageDesktopApp.csproj", "{7E7BD94E-FD3C-4889-B5A3-ACAF34D6A3AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C08107C2-1548-40B8-9792-AEF8EE4F3624}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C08107C2-1548-40B8-9792-AEF8EE4F3624}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C08107C2-1548-40B8-9792-AEF8EE4F3624}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E7BD94E-FD3C-4889-B5A3-ACAF34D6A3AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E7BD94E-FD3C-4889-B5A3-ACAF34D6A3AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E7BD94E-FD3C-4889-B5A3-ACAF34D6A3AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E7BD94E-FD3C-4889-B5A3-ACAF34D6A3AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
