@@ -29,12 +29,19 @@ namespace StorageAPI.Services
             return statesOfStorages;
         }
 
+        public async Task<StateOfStorage> FindProductOnStorageAsync(uint storageId, uint productId)
+        {
+            var stateOfStorage = await _dbContext.StatesOfStorages.Where(s => ((s.ProductId == productId) && ((s.StorageId == storageId)))).SingleOrDefaultAsync();
+            return stateOfStorage;
+        }
+
         public async Task<StateOfStorage> CreateStateOfStorageAsync(StateOfStorage stateOfStorageToCreate)
         {
             var stateOfStorageFromDb = await _dbContext.StatesOfStorages.SingleOrDefaultAsync(s => s.Id == stateOfStorageToCreate.Id);
             var productFromDb = await _dbContext.Products.SingleOrDefaultAsync(p => p.Id == stateOfStorageToCreate.ProductId);
             var storageFromDb = await _dbContext.Storages.SingleOrDefaultAsync(s => s.Id == stateOfStorageToCreate.StorageId);
-            if ((stateOfStorageFromDb != null) || (productFromDb == null) || (storageFromDb == null))
+            var existing = await FindProductOnStorageAsync(stateOfStorageToCreate.StorageId, stateOfStorageToCreate.ProductId);
+            if ((stateOfStorageFromDb != null) || (productFromDb == null) || (storageFromDb == null) || (existing != null))
             {
                 return null;
             }
