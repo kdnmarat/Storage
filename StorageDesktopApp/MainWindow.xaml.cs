@@ -24,8 +24,6 @@ namespace StorageDesktopApp
     public partial class MainWindow : Window
     {
         public List<StateOfStorage> StatesOfStorages;
-        public List<Product> Products;
-        public List<Storage> Storages;
 
         public MainWindow()
         {
@@ -53,8 +51,8 @@ namespace StorageDesktopApp
             {
                 StatesOfStorages = await StorageAPIClient.StatesOfStorages.GetAllStatesOfStorages(StorageHTTPClient.Instance.HttpClient);
                 dgStatesOfProducts.ItemsSource = StatesOfStorages;
-                Products = await StorageAPIClient.Products.GetAllProducts(StorageHTTPClient.Instance.HttpClient);
-                Storages = await StorageAPIClient.Storages.GetAllStorages(StorageHTTPClient.Instance.HttpClient);
+                Product.ProductsList = await StorageAPIClient.Products.GetAllProducts(StorageHTTPClient.Instance.HttpClient);
+                Storage.StoragesList = await StorageAPIClient.Storages.GetAllStorages(StorageHTTPClient.Instance.HttpClient);
             }
             catch (Exception ex)
             {
@@ -64,7 +62,12 @@ namespace StorageDesktopApp
 
         private void btnShowProduct_Click(object sender, RoutedEventArgs e)
         {
-
+            var productsWindow = new ProductsWindow();
+            productsWindow.Owner = this;
+            if (productsWindow.ShowDialog() != true)
+            {
+                return;
+            }
         }
 
         private void btnShowStorage_Click(object sender, RoutedEventArgs e)

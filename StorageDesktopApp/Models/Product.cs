@@ -9,6 +9,8 @@ namespace StorageDesktopApp.Models
 {
     public class Product
     {
+        public static List<Product>? ProductsList;
+
         public uint Id { get; set; }
         public string? Name { get; set; }
         public decimal Cost { get; set; }

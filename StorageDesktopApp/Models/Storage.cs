@@ -9,6 +9,8 @@ namespace StorageDesktopApp.Models
 {
     public class Storage
     {
+
+        public static List<Storage>? StoragesList;
         public uint Id { get; set; }
         public string? Name { get; set; }
         public string? KindOfStorage { get; set; }
