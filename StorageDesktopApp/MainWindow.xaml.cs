@@ -32,17 +32,17 @@ namespace StorageDesktopApp
 
         private void btnAddStateOfStorage_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Not implemented yet =(");
         }
 
         private void btnChangeQuantity_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Not implemented yet =(");
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Not implemented yet =(");
         }
 
         private async void btnRefreshStatesOfStorages_Click(object sender, RoutedEventArgs e)
@@ -75,7 +75,7 @@ namespace StorageDesktopApp
 
         private void btnShowStorage_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Not implemented yet =(");
         }
     }
 }

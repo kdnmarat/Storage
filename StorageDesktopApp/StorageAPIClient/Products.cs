@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,6 +40,24 @@ namespace StorageDesktopApp.StorageAPIClient
             {
                 throw ex;
             }
+        }
+
+        public static async Task<HttpResponseMessage> AddProduct(HttpClient client, Product productToAdd)
+        {
+            HttpResponseMessage response;
+            try
+            {
+                var builder = new UriBuilder($"{client.BaseAddress}StorageAPI/Products/CreateProduct");
+                var url = builder.ToString();
+                var json = JsonConvert.SerializeObject(productToAdd);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                response = await client.PostAsync(url, content);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
     }
 }
