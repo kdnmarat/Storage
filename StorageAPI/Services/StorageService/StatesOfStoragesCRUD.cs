@@ -7,31 +7,47 @@ namespace StorageAPI.Services
     {
         public async Task<List<StateOfStorage>> GetStatesOfStoragesAsync()
         {
-            var statesOfStorages = await _dbContext.StatesOfStorages.ToListAsync();
+            var statesOfStorages = await _dbContext.StatesOfStorages
+                .Include(s => s.Product)
+                .Include(s => s.Storage)
+                .ToListAsync();
             return statesOfStorages;
         }
 
         public async Task<StateOfStorage> GetStateOfStorageAsync(uint id)
         {
-            var stateOfStorage = await _dbContext.StatesOfStorages.Where(s => (s.Id == id)).FirstOrDefaultAsync();
+            var stateOfStorage = await _dbContext.StatesOfStorages.Where(s => (s.Id == id))
+                .Include(s => s.Product)
+                .Include(s => s.Storage)
+                .FirstOrDefaultAsync();
             return stateOfStorage;
         }
 
         public async Task<List<StateOfStorage>> GetStatesOfStoragesByStorageIdAsync(uint id)
         {
-            var statesOfStorages = await _dbContext.StatesOfStorages.Where(s => (s.StorageId == id)).ToListAsync();
+            var statesOfStorages = await _dbContext.StatesOfStorages.Where(s => (s.StorageId == id))
+                .Include(s => s.Product)
+                .Include(s => s.Storage)
+                .ToListAsync();
             return statesOfStorages;
         }
 
         public async Task<List<StateOfStorage>> GetStatesOfStoragesByProductIdAsync(uint id)
         {
-            var statesOfStorages = await _dbContext.StatesOfStorages.Where(s => (s.ProductId == id)).ToListAsync();
+            var statesOfStorages = await _dbContext.StatesOfStorages.Where(s => (s.ProductId == id))
+                .Include(s => s.Product)
+                .Include(s => s.Storage)
+                .ToListAsync();
             return statesOfStorages;
         }
 
         public async Task<StateOfStorage> FindProductOnStorageAsync(uint storageId, uint productId)
         {
-            var stateOfStorage = await _dbContext.StatesOfStorages.Where(s => ((s.ProductId == productId) && ((s.StorageId == storageId)))).SingleOrDefaultAsync();
+            var stateOfStorage = await _dbContext.StatesOfStorages
+                .Where(s => ((s.ProductId == productId) && ((s.StorageId == storageId))))
+                .Include(s => s.Product)
+                .Include(s => s.Storage)
+                .SingleOrDefaultAsync();
             return stateOfStorage;
         }
 
