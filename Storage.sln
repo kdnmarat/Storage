@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StorageAPI", "StorageAPI\StorageAPI.csproj", "{C08107C2-1548-40B8-9792-AEF8EE4F3624}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageDesktopApp", "StorageDesktopApp\StorageDesktopApp.csproj", "{7E7BD94E-FD3C-4889-B5A3-ACAF34D6A3AA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C08107C2-1548-40B8-9792-AEF8EE4F3624} = {C08107C2-1548-40B8-9792-AEF8EE4F3624}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
