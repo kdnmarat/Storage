@@ -21,8 +21,8 @@
             <Button Content="Find a product" Margin="5" HorizontalAlignment="Center" Width="100" Height="30" x:Name="btnShowProduct" Click="btnShowProduct_Click"/>
             <Button Content="Show a storage" Margin="5" HorizontalAlignment="Center" Width="100" Height="30" x:Name="btnShowStorage" Click="btnShowStorage_Click"/>
         </StackPanel>
-        <DataGrid x:Name="dgStatesOfProducts" Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="True" CanUserAddRows="false" 
-                  CanUserDeleteRows="false" CanUserResizeRows="False" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False">
+        <DataGrid x:Name="dgStatesOfStorages" Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="True" CanUserAddRows="false" 
+                  CanUserDeleteRows="false" CanUserResizeRows="False" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" SelectionChanged="dgStatesOfStorages_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" 
                             Binding="{Binding Path=Id}"/>
@@ -40,9 +40,41 @@
         </DataGrid>
         <StackPanel  x:Name="spRightPanelButtons" Grid.Row="1" Grid.Column="2" Orientation="Vertical" Margin="5" IsEnabled="True">
             <Button Content="Refresh" Margin="5" HorizontalAlignment="Center" Width="100" Height="30" x:Name="btnRefreshStatesOfStorages" Click="btnRefreshStatesOfStorages_Click"/>
-            <Button Content="Add new" Margin="5" HorizontalAlignment="Center" Width="100" Height="30" x:Name="btnAddStateOfStorage" Click="btnAddStateOfStorage_Click"/>
-            <Button Content="Change quantity" Margin="5" HorizontalAlignment="Center" Width="100" Height="30" x:Name="btnAddGroup" Click="btnChangeQuantity_Click"/>
-            <Button Content="Remove" Margin="5" HorizontalAlignment="Center" Width="100" Height="30" x:Name="btnARemove" Click="btnRemove_Click"/>
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="ID:"/>
+                <TextBox Height="20" TextWrapping="Wrap" Text="" Width="200"
+                     x:Name="tbId" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="Storage Name:"/>
+                <TextBox Height="20" TextWrapping="Wrap" Text="" Width="200"
+                     x:Name="tbStorageName" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="Storage ID:"/>
+                <TextBox Height="20" TextWrapping="Wrap" Text="" Width="200"
+                     x:Name="tbStorageId" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="Product Name:"/>
+                <TextBox Height="20" TextWrapping="Wrap" Text="" Width="200"
+                     x:Name="tbProductName" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="Product ID:"/>
+                <TextBox Height="20" TextWrapping="Wrap" Text="" Width="200"
+                     x:Name="tbProductId" FontSize="12" VerticalContentAlignment="Center" IsReadOnly="True"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="Quantity:"/>
+                <TextBox Height="20" TextWrapping="Wrap" Text="" Width="200"
+                     x:Name="tbQuantity" FontSize="12" VerticalContentAlignment="Center"/>
+            </StackPanel>
+            <DockPanel Margin="5">
+                <Button Content="Add new" Margin="5" DockPanel.Dock="Left" Width="100" Height="30" x:Name="btnAddStateOfStorage" Click="btnAddStateOfStorage_Click"/>
+                <Button Content="Change quantity" Margin="5" DockPanel.Dock="Right" Width="100" Height="30" x:Name="btnAddGroup" Click="btnChangeQuantity_Click"/>
+            </DockPanel>
+            <Button Content="Remove" Margin="10" HorizontalAlignment="Left" Width="100" Height="30" x:Name="btnARemove" Click="btnRemove_Click"/>
         </StackPanel>
     </Grid>
 </Window>

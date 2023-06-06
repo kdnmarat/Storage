@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using StorageDesktopApp.StorageAPIClient;
+using System.Xml.Linq;
 
 namespace StorageDesktopApp
 {
@@ -24,6 +25,11 @@ namespace StorageDesktopApp
     public partial class MainWindow : Window
     {
         public List<StateOfStorage> StatesOfStorages;
+        public StateOfStorage? SelectedStateOfStorage
+        {
+            get { try { return (StateOfStorage)dgStatesOfStorages.SelectedItem; } catch { return null; } }
+            set { }
+        }
 
         public MainWindow()
         {
@@ -50,7 +56,7 @@ namespace StorageDesktopApp
             try
             {
                 StatesOfStorages = await StorageAPIClient.StatesOfStorages.GetAllStatesOfStorages(StorageHTTPClient.Instance.HttpClient);
-                dgStatesOfProducts.ItemsSource = StatesOfStorages;
+                dgStatesOfStorages.ItemsSource = StatesOfStorages;
                 Product.ProductsList = await StorageAPIClient.Products.GetAllProducts(StorageHTTPClient.Instance.HttpClient);
                 Storage.StoragesList = await StorageAPIClient.Storages.GetAllStorages(StorageHTTPClient.Instance.HttpClient);
             }
@@ -70,12 +76,27 @@ namespace StorageDesktopApp
             }
             Product selectedProduct = productsWindow.SelectedProduct;
             StatesOfStorages = await StorageAPIClient.StatesOfStorages.GetStatesFilteredByProduct(StorageHTTPClient.Instance.HttpClient, selectedProduct.Id);
-            dgStatesOfProducts.ItemsSource = StatesOfStorages;
+            dgStatesOfStorages.ItemsSource = StatesOfStorages;
         }
 
         private void btnShowStorage_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Not implemented yet =(");
+        }
+
+        private void dgStatesOfStorages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dgStatesOfStorages.SelectedItem == null)
+            {
+                return;
+            }
+            SelectedStateOfStorage = (StateOfStorage)(dgStatesOfStorages.SelectedItem);
+            tbId.Text = SelectedStateOfStorage.Id.ToString();
+            tbStorageName.Text = SelectedStateOfStorage.Storage.Name;
+            tbStorageId.Text = SelectedStateOfStorage.StorageId.ToString();
+            tbProductName.Text = SelectedStateOfStorage.Product.Name;
+            tbProductId.Text = SelectedStateOfStorage.ProductId.ToString();
+            tbQuantity.Text = SelectedStateOfStorage.Quantity.ToString();
         }
     }
 }
