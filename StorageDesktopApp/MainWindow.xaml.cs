@@ -60,7 +60,7 @@ namespace StorageDesktopApp
             }
         }
 
-        private void btnShowProduct_Click(object sender, RoutedEventArgs e)
+        private async void btnShowProduct_Click(object sender, RoutedEventArgs e)
         {
             var productsWindow = new ProductsWindow();
             productsWindow.Owner = this;
@@ -68,6 +68,9 @@ namespace StorageDesktopApp
             {
                 return;
             }
+            Product selectedProduct = productsWindow.SelectedProduct;
+            StatesOfStorages = await StorageAPIClient.StatesOfStorages.GetStatesFilteredByProduct(StorageHTTPClient.Instance.HttpClient, selectedProduct.Id);
+            dgStatesOfProducts.ItemsSource = StatesOfStorages;
         }
 
         private void btnShowStorage_Click(object sender, RoutedEventArgs e)

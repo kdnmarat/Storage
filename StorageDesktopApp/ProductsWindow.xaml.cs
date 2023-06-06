@@ -21,6 +21,10 @@ namespace StorageDesktopApp
     /// </summary>
     public partial class ProductsWindow : Window
     {
+        public Product SelectedProduct
+        {
+            get { try { return (Product)dgProducts.SelectedItem; } catch { return null; } }
+        }
         public ProductsWindow()
         {
             InitializeComponent();
@@ -41,12 +45,14 @@ namespace StorageDesktopApp
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-
+            this.DialogResult = false;
+            this.Close();
         }
 
         private void btnChooseProduct_Click(object sender, RoutedEventArgs e)
         {
-
+            this.DialogResult = true;
+            this.Close();
         }
     }
 }

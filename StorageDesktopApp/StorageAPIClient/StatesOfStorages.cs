@@ -40,5 +40,35 @@ namespace StorageDesktopApp.StorageAPIClient
                 throw ex;
             }
         }
+
+        public static async Task<List<StateOfStorage>> GetStatesFilteredByProduct(HttpClient client, uint productId)
+        {
+            HttpResponseMessage response;
+            try
+            {
+                var builder = new UriBuilder($"{client.BaseAddress}StorageAPI/StatesOfStorages/byProduct/{productId}");
+                var url = builder.ToString();
+                response = await client.GetAsync(url);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            string contents = await response.Content.ReadAsStringAsync();
+            if (string.IsNullOrEmpty(contents))
+            {
+                return null;
+            }
+            try
+            {
+                List<StateOfStorage> states = JsonConvert.DeserializeObject<List<StateOfStorage>>(contents);
+                return states;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
