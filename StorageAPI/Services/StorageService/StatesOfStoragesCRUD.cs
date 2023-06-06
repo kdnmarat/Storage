@@ -7,7 +7,7 @@ namespace StorageAPI.Services
     {
         public async Task<List<StateOfStorage>> GetStatesOfStoragesAsync()
         {
-            var statesOfStorages = await _dbContext.StatesOfStorages.ToListAsync();
+            var statesOfStorages = await _dbContext.StatesOfStorages.Include(s => s.Product).Include(s => s.Storage).ToListAsync();
             return statesOfStorages;
         }
 
