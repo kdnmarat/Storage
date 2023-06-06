@@ -13,6 +13,5 @@ namespace StorageDesktopApp.Models
         public string? Name { get; set; }
         public string? KindOfStorage { get; set; }
         public string? Address { get; set; }
-        public bool IsChecked { get; set; }
     }
 }

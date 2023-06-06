@@ -29,13 +29,6 @@ namespace StorageDesktopApp
         public MainWindow()
         {
             InitializeComponent();
-
-            Storages = new List<Models.Storage>();
-            Storages.Add(new Models.Storage() { Id = 1, Name = "Storage1", KindOfStorage = "Fruits", Address = "Somewhere", IsChecked = true});
-            Storages.Add(new Models.Storage() { Id = 2, Name = "Storage2", KindOfStorage = "Fruits", Address = "Somewhere", IsChecked = true });
-            Storages.Add(new Models.Storage() { Id = 3, Name = "Storage3", KindOfStorage = "Fruits", Address = "Somewhere", IsChecked = false });
-            Storages.Add(new Models.Storage() { Id = 4, Name = "Storage4", KindOfStorage = "Fruits", Address = "Somewhere", IsChecked = true });
-            lbFilterByStorages.ItemsSource = Storages;
         }
 
         private void btnAddStateOfStorage_Click(object sender, RoutedEventArgs e)
@@ -57,6 +50,16 @@ namespace StorageDesktopApp
         {
             StatesOfStorages = await StorageAPIClient.StatesOfStorages.GetAllStatesOfStorages(StorageHTTPClient.Instance.HttpClient);
             dgStatesOfProducts.ItemsSource = StatesOfStorages;
+        }
+
+        private void btnShowProduct_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnShowStorage_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
