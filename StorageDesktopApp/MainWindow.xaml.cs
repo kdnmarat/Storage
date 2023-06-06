@@ -24,6 +24,7 @@ namespace StorageDesktopApp
     public partial class MainWindow : Window
     {
         public List<StateOfStorage> StatesOfStorages;
+        public List<Product> Products;
         public List<Storage> Storages;
 
         public MainWindow()
@@ -36,7 +37,7 @@ namespace StorageDesktopApp
 
         }
 
-        private void btnAddGroup_Click(object sender, RoutedEventArgs e)
+        private void btnChangeQuantity_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -48,8 +49,17 @@ namespace StorageDesktopApp
 
         private async void btnRefreshStatesOfStorages_Click(object sender, RoutedEventArgs e)
         {
-            StatesOfStorages = await StorageAPIClient.StatesOfStorages.GetAllStatesOfStorages(StorageHTTPClient.Instance.HttpClient);
-            dgStatesOfProducts.ItemsSource = StatesOfStorages;
+            try
+            {
+                StatesOfStorages = await StorageAPIClient.StatesOfStorages.GetAllStatesOfStorages(StorageHTTPClient.Instance.HttpClient);
+                dgStatesOfProducts.ItemsSource = StatesOfStorages;
+                Products = await StorageAPIClient.Products.GetAllProducts(StorageHTTPClient.Instance.HttpClient);
+                Storages = await StorageAPIClient.Storages.GetAllStorages(StorageHTTPClient.Instance.HttpClient);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnShowProduct_Click(object sender, RoutedEventArgs e)

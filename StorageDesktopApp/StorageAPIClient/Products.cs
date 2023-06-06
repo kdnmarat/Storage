@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace StorageDesktopApp.StorageAPIClient
 {
-    public class StatesOfStorages
+    public class Products
     {
-        public static async Task<List<StateOfStorage>> GetAllStatesOfStorages(HttpClient client)
+        public static async Task<List<Product>> GetAllProducts(HttpClient client)
         {
             HttpResponseMessage response;
             try
             {
-                var builder = new UriBuilder($"{client.BaseAddress}StorageAPI/StatesOfStorages/");
+                var builder = new UriBuilder($"{client.BaseAddress}StorageAPI/Products/");
                 var url = builder.ToString();
                 response = await client.GetAsync(url);
             }
@@ -32,8 +32,8 @@ namespace StorageDesktopApp.StorageAPIClient
             }
             try
             {
-                List<StateOfStorage> states = JsonConvert.DeserializeObject<List<StateOfStorage>>(contents);
-                return states;
+                List<Product> products = JsonConvert.DeserializeObject<List<Product>>(contents);
+                return products;
             }
             catch (Exception ex)
             {
